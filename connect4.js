@@ -1,4 +1,5 @@
 "use strict";
+
 class Game {
   constructor(height, width) {
     this.height = height;
@@ -48,7 +49,7 @@ class Game {
  * Player 1 and 2 alternate turns. On each turn, a piece is dropped down a
  * column until a player gets four-in-a-row (horiz, vert, or diag) or until
  * board fills (tie)
- 
+
 
 const WIDTH = 7;
 const HEIGHT = 6;
@@ -58,7 +59,7 @@ let board = []; // array of rows, each row is array of cells  (board[y][x])
 
 /** makeBoard: create in-JS board structure:
  *   board = array of rows, each row is array of cells  (board[y][x])
- 
+
 
 function makeBoard() {
   for (let y = 0; y < HEIGHT; y++) {
@@ -66,7 +67,7 @@ function makeBoard() {
   }
 }
 
-/** makeHtmlBoard: make HTML table and row of column tops. 
+/** makeHtmlBoard: make HTML table and row of column tops.
 
 function makeHtmlBoard() {
   const board = document.getElementById('board');
@@ -192,5 +193,7 @@ function checkForWin() {
   }
 }
 
-makeBoard();
-makeHtmlBoard();
+let connectFour = new Game(6, 7);   // assuming constructor takes height, width
+connectFour.makeBoard();
+connectFour.makeHtmlBoard();
+

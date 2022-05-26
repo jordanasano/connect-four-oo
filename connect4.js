@@ -1,3 +1,18 @@
+"use strict";
+class Game {
+  constructor(height, width) {
+    this.height = height;
+    this.width = width;
+    this.board = [];
+  }
+  makeBoard() {
+    //let board = [];
+    for (let y = 0; y < HEIGHT; y++) {
+      this.board.push(Array.from({ length: WIDTH }));
+    }
+    //this.board = board;
+  }
+}
 /** Connect Four
  *
  * Player 1 and 2 alternate turns. On each turn, a piece is dropped down a

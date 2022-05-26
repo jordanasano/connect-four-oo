@@ -58,7 +58,7 @@ let board = []; // array of rows, each row is array of cells  (board[y][x])
 
 /** makeBoard: create in-JS board structure:
  *   board = array of rows, each row is array of cells  (board[y][x])
- */
+ 
 
 function makeBoard() {
   for (let y = 0; y < HEIGHT; y++) {

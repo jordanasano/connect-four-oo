@@ -14,6 +14,11 @@ class Game {
     this.currPlayer = 1;
     this.board = [];
   }
+  /** endGame: announce game end */
+  endGame(msg) {
+    alert(msg);
+  }
+
   makeBoard() {
     for (let y = 0; y < this.height; y++) {
       this.board.push(Array.from({ length: this.width }));
@@ -70,13 +75,6 @@ class Game {
       board.append(row);
     }
   }
-}
-
-
-/** endGame: announce game end */
-
-function endGame(msg) {
-  alert(msg);
 }
 
 /** handleClick: handle click of column top to play piece */

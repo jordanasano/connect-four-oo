@@ -52,7 +52,7 @@ class Game {
     // make column tops (clickable area for adding a piece to that column)
     const top = document.createElement('tr');
     top.setAttribute('id', 'column-top');
-    top.addEventListener('click', this.handleClick);
+    top.addEventListener('click', this.handleClick.bind(this));
 
     for (let x = 0; x < this.width; x++) {
       const headCell = document.createElement('td');
@@ -78,11 +78,12 @@ class Game {
 
   /** handleClick: handle click of column top to play piece */
   handleClick(evt) {
+    console.log(this);
     // get x from ID of clicked cell
     const x = +evt.target.id;
 
     // get next spot in column (if none, ignore click)
-    const y = this.findSpotForCol(x);
+    const y = this.findSpotForCol(x); // confused here
     if (y === null) {
       return;
     }

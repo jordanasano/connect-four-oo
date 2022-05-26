@@ -20,6 +20,16 @@ class Game {
     }
   }
 
+  /** findSpotForCol: given column x, return top empty y (null if filled) */
+  findSpotForCol(x) {
+    for (let y = this.height - 1; y >= 0; y--) {
+      if (!this.board[y][x]) {
+        return y;
+      }
+    }
+    return null;
+  }
+
   makeHtmlBoard() {
     const board = document.getElementById('board');
 
@@ -51,17 +61,6 @@ class Game {
   }
 }
 
-
-/** findSpotForCol: given column x, return top empty y (null if filled) */
-
-function findSpotForCol(x) {
-  for (let y = HEIGHT - 1; y >= 0; y--) {
-    if (!board[y][x]) {
-      return y;
-    }
-  }
-  return null;
-}
 
 /** placeInTable: update DOM to place piece into HTML table of board */
 

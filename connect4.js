@@ -75,37 +75,38 @@ class Game {
       board.append(row);
     }
   }
+
+  /** handleClick: handle click of column top to play piece */
+  handleClick(evt) {
+    // get x from ID of clicked cell
+    const x = +evt.target.id;
+
+    // get next spot in column (if none, ignore click)
+    const y = this.findSpotForCol(x);
+    if (y === null) {
+      return;
+    }
+
+    // place piece in board and add to HTML table
+    this.board[y][x] = this.currPlayer;
+    this.placeInTable(y, x);
+
+    // check for win
+    if (this.checkForWin()) {
+      return this.endGame(`Player ${this.currPlayer} won!`);
+    }
+
+    // check for tie
+    if (this.board.every(row => row.every(cell => cell))) {
+      return this.endGame('Tie!');
+    }
+
+    // switch players
+    this.currPlayer = this.currPlayer === 1 ? 2 : 1;
+  }
 }
 
-/** handleClick: handle click of column top to play piece */
 
-function handleClick(evt) {
-  // get x from ID of clicked cell
-  const x = +evt.target.id;
-
-  // get next spot in column (if none, ignore click)
-  const y = findSpotForCol(x);
-  if (y === null) {
-    return;
-  }
-
-  // place piece in board and add to HTML table
-  board[y][x] = currPlayer;
-  placeInTable(y, x);
-
-  // check for win
-  if (checkForWin()) {
-    return endGame(`Player ${currPlayer} won!`);
-  }
-
-  // check for tie
-  if (board.every(row => row.every(cell => cell))) {
-    return endGame('Tie!');
-  }
-
-  // switch players
-  currPlayer = currPlayer === 1 ? 2 : 1;
-}
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
 

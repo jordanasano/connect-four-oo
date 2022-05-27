@@ -78,12 +78,12 @@ class Game {
 
   /** handleClick: handle click of column top to play piece */
   handleClick(evt) {
-    console.log(this);
+    //console.log(this);
     // get x from ID of clicked cell
     const x = +evt.target.id;
 
     // get next spot in column (if none, ignore click)
-    const y = this.findSpotForCol(x); // confused here
+    const y = this.findSpotForCol(x); 
     if (y === null) {
       return;
     }
@@ -109,11 +109,12 @@ class Game {
   /** checkForWin: check board cell-by-cell for "does a win start here?" */
 
   checkForWin() {
+    //console.log(this);
     function _win(cells) {
       // Check four cells to see if they're all color of current player
       //  - cells: list of four (y, x) cells
       //  - returns true if all are legal coordinates & all match currPlayer
-
+      //console.log(this);
       return cells.every(
         ([y, x]) =>
           y >= 0 &&
@@ -123,7 +124,7 @@ class Game {
           this.board[y][x] === this.currPlayer
       );
     }
-
+    _win = _win.bind(this);
     for (let y = 0; y < this.height; y++) {
       for (let x = 0; x < this.height; x++) {
         // get "check list" of 4 cells (starting here) for each of the different

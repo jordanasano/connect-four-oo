@@ -117,11 +117,10 @@ class Game {
   /** checkForWin: check board cell-by-cell for "does a win start here?" */
 
   checkForWin() {
-    const _win = cells => {
-      // Check four cells to see if they're all color of current player
-      //  - cells: list of four (y, x) cells
-      //  - returns true if all are legal coordinates & all match currPlayer
-
+    // Check four cells to see if they're all color of current player
+    //  - cells: list of four (y, x) cells
+    //  - returns true if all are legal coordinates & all match currPlayer
+    function _win(cells) {
       return cells.every(
         ([y, x]) =>
           y >= 0 &&
@@ -132,7 +131,7 @@ class Game {
       );
     };
 
-    // _win = _win.bind(this); Don't know why, but this kinda works, but kinda breaks it...
+    const _winBnd = _win.bind(this); //Don't know why, but this kinda works, but kinda breaks it...
     // (player1 can't win)
 
     for (let y = 0; y < this.height; y++) {
@@ -145,7 +144,7 @@ class Game {
         const diagDL = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
 
         // find winner (only checking each win-possibility as needed)
-        if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
+        if (_winBnd(horiz) || _winBnd(vert) || _winBnd(diagDR) || _winBnd(diagDL)) {
           return true;
         }
       }
@@ -158,5 +157,5 @@ let startGameBtn = document.querySelector("#start-game-btn");
 let board = document.querySelector("#board");
 startGameBtn.addEventListener("click", () => {
   board.innerHTML = "";
-  new Game(6,7);
+  new Game(6, 7);
 });

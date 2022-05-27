@@ -85,12 +85,11 @@ class Game {
 
   /** handleClick: handle click of column top to play piece */
   handleClick(evt) {
-    //console.log(this);
     // get x from ID of clicked cell
     const x = +evt.target.id;
 
     // get next spot in column (if none, ignore click)
-    const y = this.findSpotForCol(x); 
+    const y = this.findSpotForCol(x);
     if (y === null) {
       return;
     }
@@ -101,6 +100,8 @@ class Game {
 
     // check for win
     if (this.checkForWin()) {
+      const top = document.querySelector("#column-top");
+      top.removeEventListener('click', this.handleClick);
       return this.endGame(`Player ${this.currPlayer} won!`);
     }
 
@@ -116,11 +117,11 @@ class Game {
   /** checkForWin: check board cell-by-cell for "does a win start here?" */
 
   checkForWin() {
-    const _win = (cells) => {
+    const _win = cells => {
       // Check four cells to see if they're all color of current player
       //  - cells: list of four (y, x) cells
       //  - returns true if all are legal coordinates & all match currPlayer
-      
+
       return cells.every(
         ([y, x]) =>
           y >= 0 &&
@@ -129,9 +130,10 @@ class Game {
           x < this.width &&
           this.board[y][x] === this.currPlayer
       );
-    }
+    };
 
-    // _win = _win.bind(this); Don't know why, but this kinda works, but kinda breaks it... (player1 can't win)
+    // _win = _win.bind(this); Don't know why, but this kinda works, but kinda breaks it...
+    // (player1 can't win)
 
     for (let y = 0; y < this.height; y++) {
       for (let x = 0; x < this.height; x++) {
@@ -152,4 +154,9 @@ class Game {
 }
 
 
-
+let startGameBtn = document.querySelector("#start-game-btn");
+let board = document.querySelector("#board");
+startGameBtn.addEventListener("click", () => {
+  board.innerHTML = "";
+  new Game(6,7);
+});

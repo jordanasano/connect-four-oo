@@ -13,6 +13,8 @@ class Game {
     this.width = width;
     this.currPlayer = 1;
     this.board = [];
+    this.makeBoard();
+    this.makeHtmlBoard();
   }
   /** endGame: announce game end */
   endGame(msg) {
@@ -124,7 +126,9 @@ class Game {
           this.board[y][x] === this.currPlayer
       );
     }
+
     _win = _win.bind(this);
+
     for (let y = 0; y < this.height; y++) {
       for (let x = 0; x < this.height; x++) {
         // get "check list" of 4 cells (starting here) for each of the different
@@ -143,8 +147,5 @@ class Game {
   }
 }
 
-
-let connectFour = new Game(6, 7);
-connectFour.makeBoard();
-connectFour.makeHtmlBoard();
+new Game(6, 7);
 

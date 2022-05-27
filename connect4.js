@@ -13,6 +13,7 @@ class Game {
     this.width = width;
     this.currPlayer = 1;
     this.board = [];
+    this.handleClick = this.handleClick.bind(this);
     this.makeBoard();
     this.makeHtmlBoard();
   }
@@ -21,6 +22,9 @@ class Game {
     alert(msg);
   }
 
+  /** makeBoard: create in-JS board structure:
+   *   board = array of rows, each row is array of cells  (board[y][x])
+   */
   makeBoard() {
     for (let y = 0; y < this.height; y++) {
       this.board.push(Array.from({ length: this.width }));
@@ -48,13 +52,14 @@ class Game {
     spot.append(piece);
   }
 
+  /** makeHtmlBoard: make HTML table and row of column tops.  */
   makeHtmlBoard() {
     const board = document.getElementById('board');
 
     // make column tops (clickable area for adding a piece to that column)
     const top = document.createElement('tr');
     top.setAttribute('id', 'column-top');
-    top.addEventListener('click', this.handleClick.bind(this));
+    top.addEventListener('click', this.handleClick);
 
     for (let x = 0; x < this.width; x++) {
       const headCell = document.createElement('td');
@@ -111,12 +116,11 @@ class Game {
   /** checkForWin: check board cell-by-cell for "does a win start here?" */
 
   checkForWin() {
-    //console.log(this);
-    function _win(cells) {
+    const _win = (cells) => {
       // Check four cells to see if they're all color of current player
       //  - cells: list of four (y, x) cells
       //  - returns true if all are legal coordinates & all match currPlayer
-      //console.log(this);
+      
       return cells.every(
         ([y, x]) =>
           y >= 0 &&
@@ -127,7 +131,7 @@ class Game {
       );
     }
 
-    _win = _win.bind(this);
+    // _win = _win.bind(this); Don't know why, but this kinda works, but kinda breaks it... (player1 can't win)
 
     for (let y = 0; y < this.height; y++) {
       for (let x = 0; x < this.height; x++) {
@@ -147,5 +151,5 @@ class Game {
   }
 }
 
-new Game(6, 7);
+
 
